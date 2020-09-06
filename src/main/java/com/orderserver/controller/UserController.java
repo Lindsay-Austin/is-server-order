@@ -1,11 +1,9 @@
-package com.authserver.controller;
+package com.orderserver.controller;
 
-import com.authserver.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -56,14 +54,14 @@ public class UserController {
     }*/
 
     @GetMapping("/test/get")
-    public String user(@AuthenticationPrincipal User user){
+    public String user(String user){
         
-        return "hello world!  "+user.getUsername();
+        return "hello world!  "+user;
     }
 
     @PostMapping("/test/post")
-    public String user1(@AuthenticationPrincipal String username){
-
+    public String user1(@RequestHeader String username){
+        //通过requestHeader获得username，username是在gateway服务中设置在请求头中的
         return "hello world!  "+username;
     }
 
